@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <!-- ================= ADD MARK ================= -->
+    <servlet>
+        <servlet-name>AddMarkServlet</servlet-name>
+        <servlet-class>com.mark.servlet.AddMarkServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddMarkServlet</servlet-name>
+        <url-pattern>/AddMarkServlet</url-pattern>
+    </servlet-mapping>
+
+
+    <!-- ================= UPDATE MARK ================= -->
+    <servlet>
+        <servlet-name>UpdateMarkServlet</servlet-name>
+        <servlet-class>com.mark.servlet.UpdateMarkServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateMarkServlet</servlet-name>
+        <url-pattern>/UpdateMarkServlet</url-pattern>
+    </servlet-mapping>
+
+
+    <!-- ================= DELETE MARK ================= -->
+    <servlet>
+        <servlet-name>DeleteMarkServlet</servlet-name>
+        <servlet-class>com.mark.servlet.DeleteMarkServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteMarkServlet</servlet-name>
+        <url-pattern>/DeleteMarkServlet</url-pattern>
+    </servlet-mapping>
+
+
+    <!-- ================= DISPLAY MARKS ================= -->
+    <servlet>
+        <servlet-name>DisplayMarksServlet</servlet-name>
+        <servlet-class>com.mark.servlet.DisplayMarksServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DisplayMarksServlet</servlet-name>
+        <url-pattern>/DisplayMarksServlet</url-pattern>
+    </servlet-mapping>
+
+
+    <!-- ================= REPORT ================= -->
+   <servlet>
+    <servlet-name>ReportServlet</servlet-name>
+    <servlet-class>com.mark.servlet.ReportServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ReportServlet</servlet-name>
+    <url-pattern>/ReportServlet</url-pattern>
+</servlet-mapping>
+
+
+</web-app>
