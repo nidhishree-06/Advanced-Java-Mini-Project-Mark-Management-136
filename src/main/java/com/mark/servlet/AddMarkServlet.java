@@ -1,29 +1,49 @@
 package com.mark.servlet;
 
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
 import com.mark.dao.MarkDAO;
 import com.mark.model.StudentMark;
+import java.io.IOException;
+import javax.servlet.*;
+import javax.servlet.http.*;
 
 public class AddMarkServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-
-        response.setContentType("text/html");
+            throws ServletException, IOException {
 
         try {
+
             StudentMark m = new StudentMark();
 
-            m.setStudentId(Integer.parseInt(request.getParameter("studentId")));
-            m.setStudentName(request.getParameter("studentName"));
-            m.setSubject(request.getParameter("subject"));
-            m.setMarks(Integer.parseInt(request.getParameter("marks")));
-            m.setExamDate(request.getParameter("examDate"));
+            // Get values safely
+            String name = request.getParameter("studentName");
+            String subject = request.getParameter("subject");
+            String marksStr = request.getParameter("marks");
+            String examDate = request.getParameter("examDate");
 
+            // VALIDATION (prevents null error)
+            if (name == null || subject == null || marksStr == null || examDate == null ||
+                name.isEmpty() || subject.isEmpty() || marksStr.isEmpty() || examDate.isEmpty()) {
+
+                response.getWriter().println("❌ All fields are required!");
+                return;
+            }
+
+            int marks = Integer.parseInt(marksStr);
+
+            if (marks < 0) {
+                response.getWriter().println("❌ Marks cannot be negative!");
+                return;
+            }
+
+            // Set values
+            m.setStudentName(name);
+            m.setSubject(subject);
+            m.setMarks(marks);
+            m.setExamDate(examDate);
+
+            // DAO call
             MarkDAO dao = new MarkDAO();
-
             int status = dao.addMark(m);
 
             if (status > 0) {
@@ -32,9 +52,9 @@ public class AddMarkServlet extends HttpServlet {
                 response.getWriter().println("Insert Failed");
             }
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            response.getWriter().println("<h3>Error: " + e.getMessage() + "</h3>");
+            response.getWriter().println("Error: " + e.getMessage());
         }
     }
 }

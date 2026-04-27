@@ -18,9 +18,8 @@
 
 <form action="UpdateMarkServlet" method="post">
 
-    <input type="number" name="studentId" placeholder="Student ID" required><br><br>
-
-    <input type="number" name="marks" placeholder="Enter New Marks" required><br><br>
+	<input type="number" name="studentId" placeholder="ID" min="1" required>
+<input type="number" name="marks" placeholder="Enter New Marks" min="0" required>
 
     <button class="btn btn-blue">Update</button>
 

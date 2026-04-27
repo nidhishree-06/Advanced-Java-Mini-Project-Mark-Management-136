@@ -22,16 +22,15 @@ public class MarkDAO {
 
         Connection con = getConnection();
 
-        String sql = "INSERT INTO StudentMarks (StudentID, StudentName, Subject, Marks, ExamDate) VALUES (?,?,?,?,?)";
 
+
+        String sql = "INSERT INTO StudentMarks (StudentName, Subject, Marks, ExamDate) VALUES (?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
 
-        ps.setInt(1, m.getStudentId());
-        ps.setString(2, m.getStudentName());
-        ps.setString(3, m.getSubject());
-        ps.setInt(4, m.getMarks());
-        ps.setString(5, m.getExamDate());
-
+        ps.setString(1, m.getStudentName());
+        ps.setString(2, m.getSubject());
+        ps.setInt(3, m.getMarks());
+        ps.setString(4, m.getExamDate());
         return ps.executeUpdate();
     }
 

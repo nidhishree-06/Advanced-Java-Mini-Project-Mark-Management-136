@@ -19,17 +19,18 @@
 
 <form action="AddMarkServlet" method="post">
 
-    <input type="number" name="studentId" placeholder="ID" required><br><br>
+    <!-- Auto ID (display only) -->
+    <input type="text" value="Auto Generated ID" readonly><br><br>
 
     <input type="text" name="studentName" placeholder="Name" required><br><br>
 
     <input type="text" name="subject" placeholder="Subject" required><br><br>
 
-    <input type="number" name="marks" placeholder="Marks" required><br><br>
+    <input type="number" name="marks" placeholder="Enter Marks" min="0" required><br><br>
 
     <input type="date" name="examDate" required><br><br>
 
-    <button class="btn btn-blue">Submit</button>
+    <button type="submit" class="btn btn-blue">Submit</button>
 
 </form>
 

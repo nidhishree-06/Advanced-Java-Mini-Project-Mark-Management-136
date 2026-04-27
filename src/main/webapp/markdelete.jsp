@@ -18,7 +18,7 @@
 
 <form action="DeleteMarkServlet" method="post">
 
-<input name="studentId" placeholder="Enter ID">
+	<input type="number" name="studentId" placeholder="ID" min="1" required>
 
 <button class="btn btn-red">Delete</button>
 <%
