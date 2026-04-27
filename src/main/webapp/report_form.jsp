@@ -25,7 +25,7 @@
 
 <input type="hidden" name="type" value="marks">
 
-<input type="number" name="marks" placeholder="Enter Marks" required>
+    <input type="number" name="marks" placeholder="Enter Marks" min="0" required><br><br>
 
 <button class="btn btn-orange">Generate</button>
 
@@ -59,7 +59,7 @@
 
 <input type="hidden" name="type" value="top">
 
-<input type="number" name="n" placeholder="Enter N Value" required>
+<input type="number" name="n" placeholder="Enter N Value" min="1" required>
 
 <button class="btn btn-blue">Generate</button>
 

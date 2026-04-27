@@ -19,8 +19,14 @@
 
 <form action="AddMarkServlet" method="post">
 
-    <!-- Auto ID (display only) -->
-    <input type="text" value="Auto Generated ID" readonly><br><br>
+    <!-- Show generated ID if available -->
+    <%
+        String id = request.getParameter("id");
+    
+    %>
+    <input type="text" 
+           value="<%= (id != null ? id : "Student ID") %>" 
+           readonly><br><br>
 
     <input type="text" name="studentName" placeholder="Name" required><br><br>
 
@@ -42,6 +48,22 @@
 <%
     }
 %>
+<%
+    String ids = request.getParameter("id");
+    if (ids != null) {
+%>
+    <h3 style="color:blue;">Generated Student ID: <%= id %></h3>
+<%
+    }
+%>
+<%
+    if(id != null){
+%>
+    <h3 style="color:blue;">Generated Student ID: <%= id %></h3>
+<%
+    }
+%>
+
 
 </div>
 

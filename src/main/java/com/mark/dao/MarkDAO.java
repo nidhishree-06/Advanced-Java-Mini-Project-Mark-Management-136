@@ -22,18 +22,28 @@ public class MarkDAO {
 
         Connection con = getConnection();
 
-
-
         String sql = "INSERT INTO StudentMarks (StudentName, Subject, Marks, ExamDate) VALUES (?,?,?,?)";
-        PreparedStatement ps = con.prepareStatement(sql);
+
+        PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
         ps.setString(1, m.getStudentName());
         ps.setString(2, m.getSubject());
         ps.setInt(3, m.getMarks());
         ps.setString(4, m.getExamDate());
-        return ps.executeUpdate();
-    }
 
+        int rows = ps.executeUpdate();
+
+        if (rows > 0) {
+
+            ResultSet rs = ps.getGeneratedKeys();
+
+            if (rs != null && rs.next()) {
+                return rs.getInt(1);   // ✅ THIS IS THE FIX
+            }
+        }
+
+        return -1;   // return -1 instead of 0 (better debugging)
+    }
     // =========================
     // UPDATE ONLY MARKS
     // =========================

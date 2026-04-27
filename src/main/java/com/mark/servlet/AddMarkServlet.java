@@ -15,13 +15,12 @@ public class AddMarkServlet extends HttpServlet {
 
             StudentMark m = new StudentMark();
 
-            // Get values safely
             String name = request.getParameter("studentName");
             String subject = request.getParameter("subject");
             String marksStr = request.getParameter("marks");
             String examDate = request.getParameter("examDate");
 
-            // VALIDATION (prevents null error)
+            // Validation
             if (name == null || subject == null || marksStr == null || examDate == null ||
                 name.isEmpty() || subject.isEmpty() || marksStr.isEmpty() || examDate.isEmpty()) {
 
@@ -36,20 +35,22 @@ public class AddMarkServlet extends HttpServlet {
                 return;
             }
 
-            // Set values
             m.setStudentName(name);
             m.setSubject(subject);
             m.setMarks(marks);
             m.setExamDate(examDate);
 
-            // DAO call
             MarkDAO dao = new MarkDAO();
-            int status = dao.addMark(m);
 
-            if (status > 0) {
-                response.sendRedirect("markadd.jsp?msg=added");
+            // ✅ get generated ID
+            int generatedId = dao.addMark(m);
+
+            System.out.println("Generated ID = " + generatedId); // DEBUG
+
+            if (generatedId > 0) {
+                response.sendRedirect("markadd.jsp?msg=added&id=" + generatedId);
             } else {
-                response.getWriter().println("Insert Failed");
+                response.getWriter().println("Insert Failed OR ID not generated");
             }
 
         } catch (Exception e) {
