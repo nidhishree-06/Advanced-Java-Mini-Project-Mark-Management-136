@@ -23,6 +23,7 @@
 
 <form action="ReportServlet" method="post">
 
+
 <input type="hidden" name="type" value="marks">
 
     <input type="number" name="marks" placeholder="Enter Marks" min="0" required><br><br>
@@ -62,8 +63,61 @@
 <input type="number" name="n" placeholder="Enter N Value" min="1" required>
 
 <button class="btn btn-blue">Generate</button>
+</form>
+
+</div>
 
 </form>
+<!-- 🔴 SUBJECT WISE PASS / FAIL REPORT -->
+<div class="card">
+
+<h3>Subject Wise Pass / Fail Report</h3>
+
+<form action="ReportServlet" method="post">
+
+    <input type="hidden" name="type" value="grade">
+
+    <!-- SUBJECT DROPDOWN -->
+    <select name="subject" required>
+
+        <option value="">-- Select Subject --</option>
+
+        <option value="Java">Java</option>
+
+        <option value="Python">Python</option>
+
+        <option value="DBMS">DBMS</option>
+
+        <option value="Operating System">Operating System</option>
+
+        <option value="Computer Networks">Computer Networks</option>
+
+        <option value="Cyber Security">Cyber Security</option>
+
+    </select>
+
+    <br><br>
+
+    <!-- PASS / FAIL -->
+    <select name="result" required>
+
+        <option value="">-- Select Result --</option>
+
+        <option value="pass">Pass Students</option>
+
+        <option value="fail">Fail Students</option>
+
+    </select>
+
+    <br><br>
+
+    <button class="btn btn-red">
+        Generate
+    </button>
+
+</form>
+
+</div>
 
 </div>
 

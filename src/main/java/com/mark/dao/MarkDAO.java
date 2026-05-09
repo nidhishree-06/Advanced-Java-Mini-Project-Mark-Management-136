@@ -68,13 +68,15 @@ public class MarkDAO {
 
         Connection con = getConnection();
 
-        PreparedStatement ps = con.prepareStatement(
-            "DELETE FROM StudentMarks WHERE StudentID=?"
-        );
+        String sql = "DELETE FROM StudentMarks WHERE StudentID=?";
+
+        PreparedStatement ps = con.prepareStatement(sql);
 
         ps.setInt(1, id);
 
-        return ps.executeUpdate();
+        int status = ps.executeUpdate();
+
+        return status;
     }
 
     // =========================
@@ -200,6 +202,194 @@ public class MarkDAO {
             m.setSubject(rs.getString("Subject"));
             m.setMarks(rs.getInt("Marks"));
             m.setExamDate(rs.getString("ExamDate"));
+
+            list.add(m);
+        }
+
+        return list;
+    }
+    public List<StudentMark> getFailStudents() throws Exception {
+
+        Connection con = getConnection();
+
+        String sql = "SELECT * FROM StudentMarks WHERE Marks < 35";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ResultSet rs = ps.executeQuery();
+
+        List<StudentMark> list = new ArrayList<>();
+
+        while(rs.next()) {
+
+            StudentMark m = new StudentMark();
+
+            m.setStudentId(rs.getInt("StudentID"));
+            m.setStudentName(rs.getString("StudentName"));
+            m.setSubject(rs.getString("Subject"));
+            m.setMarks(rs.getInt("Marks"));
+            m.setExamDate(rs.getString("ExamDate"));
+
+            list.add(m);
+        }
+
+        return list;
+    }
+    public List<StudentMark> getPassStudents() throws Exception {
+
+        Connection con = getConnection();
+
+        String sql = "SELECT * FROM StudentMarks WHERE Marks >= 35";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ResultSet rs = ps.executeQuery();
+
+        List<StudentMark> list = new ArrayList<>();
+
+        while(rs.next()) {
+
+            StudentMark m = new StudentMark();
+
+            m.setStudentId(rs.getInt("StudentID"));
+            m.setStudentName(rs.getString("StudentName"));
+            m.setSubject(rs.getString("Subject"));
+            m.setMarks(rs.getInt("Marks"));
+            m.setExamDate(rs.getString("ExamDate"));
+
+            list.add(m);
+        }
+
+        return list;
+    }
+    public List<StudentMark> getStudentsByGradeAndSubject(
+            String subject,
+            String result) throws Exception {
+
+        Connection con = getConnection();
+
+        String sql;
+
+        if(result.equals("pass")) {
+
+            sql = "SELECT * FROM StudentMarks "
+                + "WHERE Subject=? AND Marks >= 35";
+
+        } else {
+
+            sql = "SELECT * FROM StudentMarks "
+                + "WHERE Subject=? AND Marks < 35";
+        }
+
+        PreparedStatement ps =
+                con.prepareStatement(sql);
+
+        ps.setString(1, subject);
+
+        ResultSet rs = ps.executeQuery();
+
+        List<StudentMark> list =
+                new ArrayList<>();
+
+        while(rs.next()) {
+
+            StudentMark m = new StudentMark();
+
+            m.setStudentId(
+                    rs.getInt("StudentID"));
+
+            m.setStudentName(
+                    rs.getString("StudentName"));
+
+            m.setSubject(
+                    rs.getString("Subject"));
+
+            m.setMarks(
+                    rs.getInt("Marks"));
+
+            m.setExamDate(
+                    rs.getString("ExamDate"));
+
+            list.add(m);
+        }
+
+        return list;
+    }
+    public StudentMark getStudentById(int id)
+            throws Exception {
+
+        Connection con = getConnection();
+
+        String sql =
+            "SELECT * FROM StudentMarks WHERE StudentID=?";
+
+        PreparedStatement ps =
+                con.prepareStatement(sql);
+
+        ps.setInt(1, id);
+
+        ResultSet rs = ps.executeQuery();
+
+        StudentMark m = null;
+
+        if(rs.next()) {
+
+            m = new StudentMark();
+
+            m.setStudentId(
+                    rs.getInt("StudentID"));
+
+            m.setStudentName(
+                    rs.getString("StudentName"));
+
+            m.setSubject(
+                    rs.getString("Subject"));
+
+            m.setMarks(
+                    rs.getInt("Marks"));
+
+            m.setExamDate(
+                    rs.getString("ExamDate"));
+        }
+
+        return m;
+    }
+    public List<StudentMark> searchById(int id)
+            throws Exception {
+
+        Connection con = getConnection();
+
+        String sql =
+            "SELECT * FROM StudentMarks WHERE StudentID=?";
+
+        PreparedStatement ps =
+                con.prepareStatement(sql);
+
+        ps.setInt(1, id);
+
+        ResultSet rs = ps.executeQuery();
+
+        List<StudentMark> list =
+                new ArrayList<>();
+
+        while(rs.next()) {
+
+            StudentMark m = new StudentMark();
+
+            m.setStudentId(
+                    rs.getInt("StudentID"));
+
+            m.setStudentName(
+                    rs.getString("StudentName"));
+
+            m.setSubject(
+                    rs.getString("Subject"));
+
+            m.setMarks(
+                    rs.getInt("Marks"));
+
+            m.setExamDate(
+                    rs.getString("ExamDate"));
 
             list.add(m);
         }

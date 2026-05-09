@@ -26,7 +26,7 @@
     <th>Name</th>
     <th>Subject</th>
     <th>Marks</th>
-    <th>Date</th>
+    <th>Exam Date</th>
 </tr>
 
 <%

@@ -19,51 +19,87 @@
 
 <form action="AddMarkServlet" method="post">
 
-    <!-- Show generated ID if available -->
+    <!-- AUTO GENERATED ID DISPLAY -->
     <%
         String id = request.getParameter("id");
-    
     %>
-    <input type="text" 
-           value="<%= (id != null ? id : "Student ID") %>" 
+
+    <input type="text"
+           value="<%= (id != null ? id : "Auto Generated") %>"
            readonly><br><br>
 
-    <input type="text" name="studentName" placeholder="Name" required><br><br>
+    <!-- STUDENT NAME -->
+    <input type="text"
+           name="studentName"
+           placeholder="Enter Student Name"
+           required><br><br>
 
-    <input type="text" name="subject" placeholder="Subject" required><br><br>
+    <!-- SUBJECT DROPDOWN -->
+    <select name="subject" required>
 
-    <input type="number" name="marks" placeholder="Enter Marks" min="0" required><br><br>
+        <option value="">-- Select Subject --</option>
 
-    <input type="date" name="examDate" required><br><br>
+        <option value="Java">Java</option>
 
-    <button type="submit" class="btn btn-blue">Submit</button>
+        <option value="Python">Python</option>
+
+        <option value="DBMS">DBMS</option>
+
+        <option value="Operating System">Operating System</option>
+
+        <option value="Computer Networks">Computer Networks</option>
+
+        <option value="Cyber Security">Cyber Security</option>
+
+    </select>
+
+    <br><br>
+
+    <!-- MARKS -->
+    <input type="number"
+           name="marks"
+           placeholder="Enter Marks"
+           min="0"
+           required><br><br>
+
+
+
+    <!-- EXAM DATE -->
+    <input type="date"
+           name="examDate"
+        
+           required><br><br>
+
+    <!-- SUBMIT BUTTON -->
+    <button type="submit" class="btn btn-blue">
+        Submit
+    </button>
 
 </form>
 
+<!-- SUCCESS MESSAGE -->
 <%
     String msg = request.getParameter("msg");
+
     if("added".equals(msg)){
 %>
-    <h3 style="color:green;">✔ Record Added Successfully!</h3>
-<%
-    }
-%>
-<%
-    String ids = request.getParameter("id");
-    if (ids != null) {
-%>
-    <h3 style="color:blue;">Generated Student ID: <%= id %></h3>
-<%
-    }
-%>
-<%
-    if(id != null){
-%>
-    <h3 style="color:blue;">Generated Student ID: <%= id %></h3>
+    <h3 style="color:green;">
+        ✔ Record Added Successfully!
+    </h3>
 <%
     }
 %>
 
+<!-- GENERATED ID MESSAGE -->
+<%
+    if(id != null){
+%>
+    <h3 style="color:blue;">
+        Generated Student ID: <%= id %>
+    </h3>
+<%
+    }
+%>
 
 </div>
 

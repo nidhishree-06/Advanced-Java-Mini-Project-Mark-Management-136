@@ -19,6 +19,24 @@
 </div>
 
 <h2>Student Marks</h2>
+<div class="card">
+
+<form action="DisplayMarksServlet"
+      method="get">
+
+   <input type="number"
+       name="search"
+       placeholder="Search By Student ID"
+       min="1"
+       required>
+
+    <button class="btn btn-green">
+        Search
+    </button>
+
+</form>
+
+</div>
 
 <%
     List<StudentMark> list = (List<StudentMark>) request.getAttribute("list");
@@ -33,7 +51,7 @@
     <th>Name</th>
     <th>Subject</th>
     <th>Marks</th>
-    <th>Date</th>
+    <th>Exam Date</th>
 </tr>
 
 <% for (StudentMark m : list) { %>
