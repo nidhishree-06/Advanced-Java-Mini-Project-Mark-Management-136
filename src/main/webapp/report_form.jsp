@@ -43,7 +43,26 @@
 
 <input type="hidden" name="type" value="subject">
 
-<input type="text" name="subject" placeholder="Enter Subject" required>
+   <!-- SUBJECT DROPDOWN -->
+    <select name="subject" required>
+
+        <option value="">-- Select Subject --</option>
+
+        <option value="Java">Java</option>
+
+        <option value="Python">Python</option>
+
+        <option value="DBMS">DBMS</option>
+
+        <option value="Operating System">Operating System</option>
+
+        <option value="Computer Networks">Computer Networks</option>
+
+        <option value="Cyber Security">Cyber Security</option>
+
+    </select>
+
+    <br><br>
 
 <button class="btn btn-green">Generate</button>
 
