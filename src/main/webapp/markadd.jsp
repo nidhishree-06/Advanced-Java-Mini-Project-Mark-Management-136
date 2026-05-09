@@ -86,6 +86,7 @@
     <h3 style="color:green;">
         ✔ Record Added Successfully!
     </h3>
+    
 <%
     }
 %>
@@ -97,6 +98,37 @@
     <h3 style="color:blue;">
         Generated Student ID: <%= id %>
     </h3>
+<%
+    }
+%>
+<%@ page import="com.mark.model.StudentMark" %>
+
+<%
+    StudentMark s =
+        (StudentMark)request.getAttribute(
+                "addedStudent");
+
+    if(s != null){
+%>
+
+<div class="card">
+
+<h3 style="color:green;">
+    ✔ Record Added Successfully
+</h3>
+
+<p><b>ID:</b> <%= s.getStudentId() %></p>
+
+<p><b>Name:</b> <%= s.getStudentName() %></p>
+
+<p><b>Subject:</b> <%= s.getSubject() %></p>
+
+<p><b>Marks:</b> <%= s.getMarks() %></p>
+
+<p><b>Date:</b> <%= s.getExamDate() %></p>
+
+</div>
+
 <%
     }
 %>

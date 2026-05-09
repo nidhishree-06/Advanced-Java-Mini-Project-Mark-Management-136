@@ -396,4 +396,25 @@ public class MarkDAO {
 
         return list;
     }
+    public int getLastStudentId() throws Exception {
+
+        Connection con = getConnection();
+
+        String sql =
+            "SELECT MAX(StudentID) FROM StudentMarks";
+
+        PreparedStatement ps =
+                con.prepareStatement(sql);
+
+        ResultSet rs = ps.executeQuery();
+
+        int id = 0;
+
+        if(rs.next()) {
+
+            id = rs.getInt(1);
+        }
+
+        return id;
+    }
 }

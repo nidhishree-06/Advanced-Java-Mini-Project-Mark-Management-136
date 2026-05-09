@@ -2,60 +2,82 @@ package com.mark.servlet;
 
 import com.mark.dao.MarkDAO;
 import com.mark.model.StudentMark;
+
 import java.io.IOException;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 
 public class AddMarkServlet extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
             throws ServletException, IOException {
 
         try {
 
             StudentMark m = new StudentMark();
 
-            String name = request.getParameter("studentName");
-            String subject = request.getParameter("subject");
-            String marksStr = request.getParameter("marks");
-            String examDate = request.getParameter("examDate");
+            m.setStudentName(
+                    request.getParameter("studentName"));
 
-            // Validation
-            if (name == null || subject == null || marksStr == null || examDate == null ||
-                name.isEmpty() || subject.isEmpty() || marksStr.isEmpty() || examDate.isEmpty()) {
+            m.setSubject(
+                    request.getParameter("subject"));
 
-                response.getWriter().println("❌ All fields are required!");
+            int marks = Integer.parseInt(
+                    request.getParameter("marks"));
+
+            // VALIDATION
+            if(marks < 0) {
+
+                response.getWriter().println(
+                    "❌ Marks cannot be negative");
+
                 return;
             }
 
-            int marks = Integer.parseInt(marksStr);
-
-            if (marks < 0) {
-                response.getWriter().println("❌ Marks cannot be negative!");
-                return;
-            }
-
-            m.setStudentName(name);
-            m.setSubject(subject);
             m.setMarks(marks);
-            m.setExamDate(examDate);
+
+            m.setExamDate(
+                    request.getParameter("examDate"));
 
             MarkDAO dao = new MarkDAO();
 
-            // ✅ get generated ID
-            int generatedId = dao.addMark(m);
+            int status = dao.addMark(m);
 
-            System.out.println("Generated ID = " + generatedId); // DEBUG
+            if(status > 0) {
 
-            if (generatedId > 0) {
-                response.sendRedirect("markadd.jsp?msg=added&id=" + generatedId);
+                // GET LAST INSERTED ID
+                int id = dao.getLastStudentId();
+
+                // GET COMPLETE RECORD
+                StudentMark addedStudent =
+                        dao.getStudentById(id);
+
+                request.setAttribute(
+                        "addedStudent",
+                        addedStudent);
+
+                RequestDispatcher rd =
+                        request.getRequestDispatcher(
+                                "markadd.jsp");
+
+                rd.forward(request, response);
+
             } else {
-                response.getWriter().println("Insert Failed OR ID not generated");
+
+                response.getWriter().println(
+                        "Insert Failed");
             }
 
-        } catch (Exception e) {
+        }
+
+        catch(Exception e) {
+
             e.printStackTrace();
-            response.getWriter().println("Error: " + e.getMessage());
+
+            response.getWriter().println(
+                    "Error: " + e.getMessage());
         }
     }
 }
